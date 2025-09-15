@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,17 +15,15 @@
 <body class="bg-light d-flex flex-column min-vh-100">
 
     <!-- Cabeçalho -->
-    <header class="bg-primary text-white py-3 mb-4">
+    <header class="bg-dark text-white py-3 mb-4 text-center">
         <div class="container">
             <h1 class="h3 mb-0">CABEÇALHO</h1>
         </div>
     </header>
 
     <!-- Conteúdo principal -->
-    <main class="flex-fill">
-        <div class="container">
-            @yield('content')
-        </div>
+    <main>
+            @yield('content')   
     </main>
 
     <!-- Rodapé -->
