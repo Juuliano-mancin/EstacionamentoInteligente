@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@yield('title', 'Estacionamento Inteligente')</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- Cabeçalho -->
+    <header class="bg-primary text-white py-3 mb-4">
+        <div class="container">
+            <h1 class="h3 mb-0">CABEÇALHO</h1>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="flex-fill">
+        <div class="container">
+            @yield('content')
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <div class="container">
+            &copy; {{ date('Y') }} RODAPÉ
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
