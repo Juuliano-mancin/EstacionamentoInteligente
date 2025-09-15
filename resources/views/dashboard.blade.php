@@ -21,6 +21,8 @@
         <div class="card-body">
             <h1 class="card-title">Bem-vindo, {{ Auth::user()->name }}!</h1>
             <p class="card-text mt-2">Dashboard Administrativa</p>
+            <a href="{{ route('projetos.create') }}" class="btn btn-dark mt-3">Cadastrar novo projeto</a>
+            <a href="{{ route('projetos.index') }}" class="btn btn-dark mt-3 ms-2">Visualizar projetos salvos</a>
         </div>
     </div>
 </div>

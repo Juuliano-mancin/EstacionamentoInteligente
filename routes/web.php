@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjetoController;
 
 // Página inicial
 Route::view('/', 'welcome')->name('home');
@@ -16,4 +17,12 @@ Route::controller(AuthController::class)->group(function () {
 // Rotas protegidas por autenticação
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
+
+    // Rotas de projetos
+    Route::get('/projetos', [ProjetoController::class, 'index'])->name('projetos.index');
+    Route::get('/projetos/novo', [ProjetoController::class, 'create'])->name('projetos.create');
+    Route::post('/projetos', [ProjetoController::class, 'store'])->name('projetos.store');
+    Route::get('/projetos/{projeto}/editar', [ProjetoController::class, 'edit'])->name('projetos.edit');
+    Route::put('/projetos/{projeto}', [ProjetoController::class, 'update'])->name('projetos.update');
+    Route::delete('/projetos/{projeto}', [ProjetoController::class, 'destroy'])->name('projetos.destroy');
 });
