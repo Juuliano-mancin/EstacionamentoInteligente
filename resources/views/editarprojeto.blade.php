@@ -15,7 +15,7 @@
     @endif
 
     <form action="{{ route('projetos.update', $projeto) }}" method="POST">
-        @include('projetos._form')
+        @include('partials._formProjeto')
         <button type="submit" class="btn btn-dark">Atualizar Projeto</button>
         <a href="{{ route('projetos.index') }}" class="btn btn-dark">Cancelar</a>
     </form>

@@ -25,7 +25,7 @@
     <form action="{{ route('estacionamentos.update', $estacionamento) }}" method="POST">
         @csrf
         @method('PUT')
-        @include('projetos._formEstacionamento', ['submitButtonText' => 'Atualizar Estacionamento'])
+        @include('partials._formEstacionamento', ['submitButtonText' => 'Atualizar Estacionamento'])
     </form>
     
 </div>

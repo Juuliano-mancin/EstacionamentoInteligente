@@ -24,7 +24,7 @@
 
     <form action="{{ route('estacionamentos.store') }}" method="POST">
         @csrf
-        @include('projetos._formEstacionamento', ['submitButtonText' => 'Salvar Estacionamento'])
+        @include('partials._formEstacionamento', ['submitButtonText' => 'Salvar Estacionamento'])
     </form>
 
 </div>

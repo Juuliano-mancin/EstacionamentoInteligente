@@ -1,4 +1,4 @@
-{{-- resources/views/projetos/_formEstacionamento.blade.php --}}
+{{-- resources/views/partials/_formEstacionamento.blade.php --}}
 
 <div id="formCampos">
     <div class="mb-3">
