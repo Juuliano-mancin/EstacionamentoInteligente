@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_projeto', function (Blueprint $table) {
-            $table->id('id_projeto'); // PK + Auto Increment
-            $table->string('nomeprojeto', 100)->unique();
+            $table->id('idProjeto'); // PK + Auto Increment (renomeado)
+            $table->string('nomeProjeto', 100)->unique(); // renomeado
             $table->string('nomeFantasia', 150);
             $table->string('razaoSocial', 150);
             $table->string('contatoNome', 100);

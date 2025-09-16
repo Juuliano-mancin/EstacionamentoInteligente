@@ -5,9 +5,9 @@
 @endif
 
 <div class="mb-3">
-    <label for="nomeprojeto" class="form-label">Nome do Projeto</label>
-    <input type="text" class="form-control" id="nomeprojeto" name="nomeprojeto"
-           value="{{ old('nomeprojeto', $projeto->nomeprojeto ?? '') }}" required>
+    <label for="nomeProjeto" class="form-label">Nome do Projeto</label>
+    <input type="text" class="form-control" id="nomeProjeto" name="nomeProjeto"
+           value="{{ old('nomeProjeto', $projeto->nomeProjeto ?? '') }}" required>
 </div>
 
 <div class="mb-3">

@@ -9,7 +9,7 @@ class ProjetoController extends Controller
 {
     public function index()
     {
-        $projetos = Projeto::orderBy('id_projeto', 'desc')->paginate(10);
+        $projetos = Projeto::orderBy('idProjeto', 'desc')->paginate(10);
         return view('listaprojeto', compact('projetos'));
     }
 
@@ -24,7 +24,7 @@ class ProjetoController extends Controller
     {
         // Validação completa
         $request->validate([
-            'nomeprojeto'        => 'required|string|max:100|unique:tb_projeto,nomeprojeto',
+            'nomeProjeto'        => 'required|string|max:100|unique:tb_projeto,nomeProjeto',
             'nomeFantasia'       => 'required|string|max:150',
             'razaoSocial'        => 'required|string|max:150',
             'contatoNome'        => 'required|string|max:100',
@@ -54,7 +54,7 @@ class ProjetoController extends Controller
     public function update(Request $request, Projeto $projeto)
     {
         $request->validate([
-            'nomeprojeto'        => 'required|string|max:100|unique:tb_projeto,nomeprojeto,' . $projeto->id_projeto . ',id_projeto',
+            'nomeProjeto'        => 'required|string|max:100|unique:tb_projeto,nomeProjeto,' . $projeto->idProjeto . ',idProjeto',
             'nomeFantasia'       => 'required|string|max:150',
             'razaoSocial'        => 'required|string|max:150',
             'contatoNome'        => 'required|string|max:100',

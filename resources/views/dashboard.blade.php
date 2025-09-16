@@ -23,6 +23,8 @@
             <p class="card-text mt-2">Dashboard Administrativa</p>
             <a href="{{ route('projetos.create') }}" class="btn btn-dark mt-3">Cadastrar novo projeto</a>
             <a href="{{ route('projetos.index') }}" class="btn btn-dark mt-3 ms-2">Visualizar projetos salvos</a>
+            <a href="{{ route('estacionamentos.create') }}" class="btn btn-dark mt-3 ms-2">Cadastrar novo estacionamento</a>
+            <a href="{{ route('estacionamentos.index') }}" class="btn btn-dark mt-3">Visualizar Estacionamentos</a>
         </div>
     </div>
 </div>

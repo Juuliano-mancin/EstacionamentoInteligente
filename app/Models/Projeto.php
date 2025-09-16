@@ -13,11 +13,11 @@ class Projeto extends Model
     protected $table = 'tb_projeto';
 
     // Chave primária personalizada
-    protected $primaryKey = 'id_projeto';
+    protected $primaryKey = 'idProjeto';
 
     // Campos preenchíveis (mass assignment)
     protected $fillable = [
-        'nomeprojeto',
+        'nomeProjeto',
         'nomeFantasia',
         'razaoSocial',
         'contatoNome',
