@@ -28,4 +28,9 @@ class Estacionamento extends Model
     {
         return $this->belongsTo(Projeto::class, 'idProjeto', 'idProjeto');
     }
+
+     public function setores()
+    {
+        return $this->hasMany(Setor::class, 'idEstacionamento', 'idEstacionamento');
+    }
 }

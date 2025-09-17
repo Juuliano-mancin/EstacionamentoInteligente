@@ -22,9 +22,10 @@
             <h1 class="card-title">Bem-vindo, {{ Auth::user()->name }}!</h1>
             <p class="card-text mt-2">Dashboard Administrativa</p>
             <a href="{{ route('projetos.create') }}" class="btn btn-dark mt-3">Cadastrar novo projeto</a>
-            <a href="{{ route('projetos.index') }}" class="btn btn-dark mt-3 ms-2">Visualizar projetos salvos</a>
-            <a href="{{ route('estacionamentos.create') }}" class="btn btn-dark mt-3 ms-2">Cadastrar novo estacionamento</a>
+            <a href="{{ route('projetos.index') }}" class="btn btn-dark mt-3">Visualizar projetos salvos</a>
+            <a href="{{ route('estacionamentos.create') }}" class="btn btn-dark mt-3">Cadastrar novo estacionamento</a>
             <a href="{{ route('estacionamentos.index') }}" class="btn btn-dark mt-3">Visualizar Estacionamentos</a>
+            <a href="{{ route('setoresestacionamento.index') }}" class="btn btn-dark mt-3">Setores do Estacionamento</a>
         </div>
     </div>
 </div>

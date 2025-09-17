@@ -4,19 +4,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjetoController;
 use App\Http\Controllers\EstacionamentoController;
+use App\Http\Controllers\SetorEstacionamentoController;
 
 // Página inicial
 Route::view('/', 'welcome')->name('home');
 
 // Rotas de autenticação
-Route::controller(AuthController::class)->group(function () {
+    Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
     Route::post('/login', 'login')->name('login.post');
     Route::post('/logout', 'logout')->name('logout');
 });
 
 // Rotas protegidas por autenticação
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
     // Rotas de projetos
@@ -34,4 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/estacionamentos/{estacionamento}/editar', [EstacionamentoController::class, 'edit'])->name('estacionamentos.edit');
     Route::put('/estacionamentos/{estacionamento}', [EstacionamentoController::class, 'update'])->name('estacionamentos.update');
     Route::delete('/estacionamentos/{estacionamento}', [EstacionamentoController::class, 'destroy'])->name('estacionamentos.destroy');
+
+    // Rotas de setores de estacionamento
+    Route::get('/setores-estacionamento', [SetorEstacionamentoController::class, 'index'])->name('setoresestacionamento.index');
+    Route::get('/setores-estacionamento/{id}', [SetorEstacionamentoController::class, 'show'])->name('setoresestacionamento.show');
+    Route::get('/setores-estacionamento/{idProjeto}/{idEstacionamento}', [EstacionamentoController::class, 'getEstacionamento'])->name('estacionamentos.get');
+    Route::post('estacionamentos/salvar-setores', [EstacionamentoController::class, 'salvarSetores'])->name('estacionamentos.salvarSetores');
+
 });
