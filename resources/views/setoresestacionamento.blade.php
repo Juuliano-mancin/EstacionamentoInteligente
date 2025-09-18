@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+
+    <div class="mb-3">
+        <a href="{{ route('dashboard') }}" class="btn btn-dark">Voltar para Dashboard</a>
+    </div>
+
     <h1 class="mb-4">Setores do Estacionamento</h1>
 
     {{-- Dropdown do estacionamento --}}
@@ -74,9 +79,9 @@
 
 <style>
     #gridWrapper { display: flex; justify-content: center; }
-    .grid { display: grid; gap: 2px; margin-top: 20px; }
+    .grid { display: grid; gap: 6px; margin-top: 20px; }
     .grid-cell {
-        width: 50px; height: 50px; background: #f0f0f0;
+        width: 40px; height: 60px; background: #f0f0f0;
         border: 1px solid #000; display: flex;
         align-items: center; justify-content: center;
         font-size: 12px; opacity: 1; position: relative;
@@ -309,6 +314,10 @@ document.getElementById('btnSalvar').addEventListener('click', function(){
 
         if(res.ok && data.success){
             alert(data.message);
+
+            // 🚀 redireciona para a nova view de vagas
+            window.location.href = `/estacionamentos/${idEstacionamento}/vagas`;
+
         } else if(data.errors){
             alert(Object.values(data.errors).flat().join('\n'));
         } else if(data.message){

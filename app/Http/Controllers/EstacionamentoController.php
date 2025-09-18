@@ -189,4 +189,11 @@ class EstacionamentoController extends Controller
             'nomeProjeto' => $estacionamento->projeto->nomeProjeto ?? null
         ]);
     }
+
+    public function vagasEstacionamento($idEstacionamento)
+    {
+        $estacionamento = Estacionamento::with(['projeto', 'setores.grids'])->findOrFail($idEstacionamento);
+
+        return view('vagasestacionamento', compact('estacionamento'));
+    }
 }

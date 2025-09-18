@@ -41,5 +41,7 @@ Route::view('/', 'welcome')->name('home');
     Route::get('/setores-estacionamento/{id}', [SetorEstacionamentoController::class, 'show'])->name('setoresestacionamento.show');
     Route::get('/setores-estacionamento/{idProjeto}/{idEstacionamento}', [EstacionamentoController::class, 'getEstacionamento'])->name('estacionamentos.get');
     Route::post('estacionamentos/salvar-setores', [EstacionamentoController::class, 'salvarSetores'])->name('estacionamentos.salvarSetores');
+    
+    Route::get('/estacionamentos/{idEstacionamento}/vagas', [EstacionamentoController::class, 'vagasEstacionamento'])->name('estacionamentos.vagas');
 
 });
