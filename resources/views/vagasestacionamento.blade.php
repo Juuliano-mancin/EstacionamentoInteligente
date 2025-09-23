@@ -13,7 +13,6 @@
         <a href="{{ route('dashboard') }}" class="btn btn-dark">Voltar para Dashboard</a>
     </div>
 
-    {{-- Linha principal --}}
     <div class="row">
         {{-- Grid --}}
         <div class="col-md-6 d-flex justify-content-center">
@@ -148,7 +147,45 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.getElementById('btnSalvar').addEventListener('click', ()=> {
-        alert('Salvar vagas - placeholder');
+        const vagas = [];
+        document.querySelectorAll('.grid-cell').forEach(cell => {
+            const icon = cell.querySelector('.vaga-icon');
+            if(icon){
+                vagas.push({
+                    posVagaX: cell.dataset.x,
+                    posVagaY: cell.dataset.y,
+                    tipo: icon.dataset.tipo,
+                    status: true,
+                    idSetor: cell.dataset.setorId || null
+                });
+            }
+        });
+
+        fetch("{{ url('/vagas') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({
+                idEstacionamento: {{ $estacionamento->idEstacionamento }},
+                vagas: vagas
+            })
+        })
+        .then(response => {
+            if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            alert(data.message || "Vagas salvas com sucesso!");
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Erro ao salvar vagas: " + error.message);
+        });
     });
 
     // Construir grid
@@ -163,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 setor.grids.forEach(g=>{
                     if(g.posX==x && g.posY==y){
                         cell.dataset.setor=setor.nomeSetor;
+                        cell.dataset.setorId = setor.idSetor;
                         cell.style.backgroundColor=setor.corSetor || '#ccc';
                     }
                 });
@@ -209,7 +247,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 row.querySelector('.preferencial').textContent = resumo[setor].preferencial;
                 row.querySelector('.especial').textContent = resumo[setor].especial;
 
-                // Destacar se ultrapassar máximo
                 if(resumo[setor].carro > {{ $estacionamento->vagasCarro }} ||
                    resumo[setor].moto > {{ $estacionamento->vagasMoto }} ||
                    resumo[setor].preferencial > {{ $estacionamento->vagasPreferencial }} ||
@@ -232,7 +269,6 @@ document.addEventListener("DOMContentLoaded", function() {
         totalRow.querySelector('.preferencial').textContent = totalGeral.preferencial;
         totalRow.querySelector('.especial').textContent = totalGeral.especial;
 
-        // Destacar total geral se ultrapassar máximo
         if(totalGeral.carro >= {{ $estacionamento->vagasCarro }} ||
            totalGeral.moto >= {{ $estacionamento->vagasMoto }} ||
            totalGeral.preferencial >= {{ $estacionamento->vagasPreferencial }} ||

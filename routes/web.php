@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjetoController;
 use App\Http\Controllers\EstacionamentoController;
 use App\Http\Controllers\SetorEstacionamentoController;
+use App\Http\Controllers\VagaController;
 
 // Página inicial
 Route::view('/', 'welcome')->name('home');
@@ -44,4 +45,10 @@ Route::view('/', 'welcome')->name('home');
     
     Route::get('/estacionamentos/{idEstacionamento}/vagas', [EstacionamentoController::class, 'vagasEstacionamento'])->name('estacionamentos.vagas');
 
+    Route::prefix('vagas')->group(function () {
+    Route::get('/{idEstacionamento}', [VagaController::class, 'index']);
+    Route::post('/', [VagaController::class, 'store']);
+    Route::put('/{idVaga}', [VagaController::class, 'update']);
+    Route::delete('/{idVaga}', [VagaController::class, 'destroy']);
+});
 });

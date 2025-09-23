@@ -25,4 +25,9 @@ class SetorEstacionamentoController extends Controller
 
         return response()->json($estacionamento);
     }
+
+    public function vagas()
+    {
+        return $this->hasMany(Vaga::class, 'idSetor', 'idSetor');
+    }
 }

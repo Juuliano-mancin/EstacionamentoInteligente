@@ -33,4 +33,9 @@ class Estacionamento extends Model
     {
         return $this->hasMany(Setor::class, 'idEstacionamento', 'idEstacionamento');
     }
+
+    public function vagas()
+    {
+        return $this->hasMany(Vaga::class, 'idEstacionamento', 'idEstacionamento');
+    }
 }
