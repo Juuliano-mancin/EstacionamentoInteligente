@@ -27,7 +27,7 @@
                     <button id="btnCarro" class="btn btn-dark"><i class="bi bi-car-front-fill"></i> Vaga Carro</button>
                     <button id="btnMoto" class="btn btn-dark"><i class="bi bi-bicycle"></i> Vaga Moto</button>
                     <button id="btnPreferencial" class="btn btn-dark"><i class="bi bi-person-fill"></i> Vaga Preferencial</button>
-                    <button id="btnEspecial" class="btn btn-dark"><i class="bi bi-handicap"></i> Vaga Especial</button>
+                    <button id="btnPcd" class="btn btn-dark"><i class="bi bi-person-wheelchair"></i> Vaga PCD</button>
                     <button id="btnLimpar" class="btn btn-dark">Limpar Vagas</button>
                     <button id="btnSalvar" class="btn btn-success">Finalizar Estacionamento</button>
                 </div>
@@ -45,7 +45,7 @@
                             <th scope="col">Carro</th>
                             <th scope="col">Moto</th>
                             <th scope="col">Preferencial</th>
-                            <th scope="col">Especial</th>
+                            <th scope="col">PCD</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +55,7 @@
                             <td class="carro">0</td>
                             <td class="moto">0</td>
                             <td class="preferencial">0</td>
-                            <td class="especial">0</td>
+                            <td class="pcd">0</td>
                         </tr>
                         @endforeach
                         <tr id="totalVagasRow">
@@ -63,7 +63,7 @@
                             <td class="carro fw-bold">0</td>
                             <td class="moto fw-bold">0</td>
                             <td class="preferencial fw-bold">0</td>
-                            <td class="especial fw-bold">0</td>
+                            <td class="pcd fw-bold">0</td>
                         </tr>
                     </tbody>
                 </table>
@@ -82,7 +82,7 @@
                         <tr><td>Carro</td><td id="maxCarro">{{ $estacionamento->vagasCarro }}</td></tr>
                         <tr><td>Moto</td><td id="maxMoto">{{ $estacionamento->vagasMoto }}</td></tr>
                         <tr><td>Preferencial</td><td id="maxPref">{{ $estacionamento->vagasPreferencial }}</td></tr>
-                        <tr><td>Especial (PCD)</td><td id="maxEspecial">{{ $estacionamento->vagasPcd }}</td></tr>
+                        <tr><td>PCD</td><td id="maxPcd">{{ $estacionamento->vagasPcd }}</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -132,14 +132,14 @@ document.addEventListener("DOMContentLoaded", function() {
         carro: '<i class="bi bi-car-front-fill vaga-icon" data-tipo="carro"></i>',
         moto: '<i class="bi bi-bicycle vaga-icon" data-tipo="moto"></i>',
         preferencial: '<i class="bi bi-person-fill vaga-icon" data-tipo="preferencial"></i>',
-        especial: '<i class="bi bi-handicap vaga-icon" data-tipo="especial"></i>'
+        pcd: '<i class="bi bi-person-wheelchair vaga-icon" data-tipo="pcd"></i>'
     };
     let tipoAtivo = null;
 
     document.getElementById('btnCarro').addEventListener('click', ()=> tipoAtivo='carro');
     document.getElementById('btnMoto').addEventListener('click', ()=> tipoAtivo='moto');
     document.getElementById('btnPreferencial').addEventListener('click', ()=> tipoAtivo='preferencial');
-    document.getElementById('btnEspecial').addEventListener('click', ()=> tipoAtivo='especial');
+    document.getElementById('btnPcd').addEventListener('click', ()=> tipoAtivo='pcd');
 
     document.getElementById('btnLimpar').addEventListener('click', ()=> {
         document.querySelectorAll('.grid-cell').forEach(c => c.innerHTML='');
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function atualizarResumo(){
         const resumo = {};
-        setores.forEach(s=> resumo[s.nomeSetor]={carro:0,moto:0,preferencial:0,especial:0});
+        setores.forEach(s=> resumo[s.nomeSetor]={carro:0,moto:0,preferencial:0,pcd:0});
 
         document.querySelectorAll('.grid-cell').forEach(cell=>{
             const setor = cell.dataset.setor;
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        let totalGeral = {carro:0,moto:0,preferencial:0,especial:0};
+        let totalGeral = {carro:0,moto:0,preferencial:0,pcd:0};
 
         Object.keys(resumo).forEach(setor=>{
             const row = document.querySelector(`tr[data-setor="${setor}"]`);
@@ -245,12 +245,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 row.querySelector('.carro').textContent = resumo[setor].carro;
                 row.querySelector('.moto').textContent = resumo[setor].moto;
                 row.querySelector('.preferencial').textContent = resumo[setor].preferencial;
-                row.querySelector('.especial').textContent = resumo[setor].especial;
+                row.querySelector('.pcd').textContent = resumo[setor].pcd;
 
                 if(resumo[setor].carro > {{ $estacionamento->vagasCarro }} ||
                    resumo[setor].moto > {{ $estacionamento->vagasMoto }} ||
                    resumo[setor].preferencial > {{ $estacionamento->vagasPreferencial }} ||
-                   resumo[setor].especial > {{ $estacionamento->vagasPcd }}) {
+                   resumo[setor].pcd > {{ $estacionamento->vagasPcd }}) {
                        row.classList.add('over-limit');
                 } else {
                        row.classList.remove('over-limit');
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 totalGeral.carro += resumo[setor].carro;
                 totalGeral.moto += resumo[setor].moto;
                 totalGeral.preferencial += resumo[setor].preferencial;
-                totalGeral.especial += resumo[setor].especial;
+                totalGeral.pcd += resumo[setor].pcd;
             }
         });
 
@@ -267,12 +267,12 @@ document.addEventListener("DOMContentLoaded", function() {
         totalRow.querySelector('.carro').textContent = totalGeral.carro;
         totalRow.querySelector('.moto').textContent = totalGeral.moto;
         totalRow.querySelector('.preferencial').textContent = totalGeral.preferencial;
-        totalRow.querySelector('.especial').textContent = totalGeral.especial;
+        totalRow.querySelector('.pcd').textContent = totalGeral.pcd;
 
         if(totalGeral.carro >= {{ $estacionamento->vagasCarro }} ||
            totalGeral.moto >= {{ $estacionamento->vagasMoto }} ||
            totalGeral.preferencial >= {{ $estacionamento->vagasPreferencial }} ||
-           totalGeral.especial >= {{ $estacionamento->vagasPcd }}) {
+           totalGeral.pcd >= {{ $estacionamento->vagasPcd }}) {
                totalRow.classList.add('over-limit');
         } else {
                totalRow.classList.remove('over-limit');

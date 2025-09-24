@@ -62,7 +62,7 @@ class VagaController extends Controller
         $vaga = Vagas::findOrFail($idVaga);
 
         $data = $request->validate([
-            'tipo' => 'nullable|in:carro,moto,preferencial,especial,pcd',
+            'tipo' => 'nullable|in:carro,moto,preferencial,pcd',
             'status' => 'boolean',
             'idSetor' => 'nullable|exists:tb_setores,idSetor',
         ]);
